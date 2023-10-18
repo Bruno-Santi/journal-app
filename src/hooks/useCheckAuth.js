@@ -12,11 +12,8 @@ export const useCheckAuth = () => {
     onAuthStateChanged(fireBaseAuth, async (user) => {
       if (!user) return dispatch(logout());
       dispatch(login(user));
-      console.log(user);
     });
   }, []);
 
-  return {
-    status,
-  };
+  return status;
 };

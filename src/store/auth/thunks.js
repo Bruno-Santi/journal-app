@@ -1,4 +1,5 @@
 import {
+  logOutFirebase,
   loginUserWithEmailAndPassword,
   registerUserWithEmailPassword,
   signInWithGoogle,
@@ -18,8 +19,6 @@ const startGoogleSignIn = () => {
     const result = await signInWithGoogle();
     if (!result.ok) return dispatch(logout(result.errorMessage));
     dispatch(login(result));
-
-    console.log(result);
   };
 };
 
@@ -35,14 +34,27 @@ const startLoginWithEmailAndPassword = (formData) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
     const result = await loginUserWithEmailAndPassword(formData);
-    console.log(result);
+
     if (!result.ok) return dispatch(logout(result.errorMessage));
     dispatch(login(result));
   };
 };
+
+const startLogOut = () => {
+  return async (dispatch) => {
+    try {
+      await logOutFirebase();
+      dispatch(logout());
+    } catch (error) {
+      return error.message;
+    }
+  };
+};
+
 export {
   checkingAuthentication,
   startGoogleSignIn,
   startCreatingUserWithEmailPassword,
   startLoginWithEmailAndPassword,
+  startLogOut,
 };
