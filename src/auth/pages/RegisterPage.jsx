@@ -29,12 +29,12 @@ export const RegisterPage = () => {
     displayName,
     email,
     password,
-    confirmPassword,
+
     onInputChange,
     isFormValid,
     emailValid,
     passwordValid,
-    confirmPasswordValid,
+
     displayNameValid,
     formState,
   } = useForm(formData, formValidations);
@@ -45,11 +45,12 @@ export const RegisterPage = () => {
     dispatch(startCreatingUserWithEmailPassword(formState));
     console.log(formState);
     if (!isFormValid) return;
+    console.log(formState);
   };
   console.log(passwordValid);
   return (
     <AuthLayout title='Register'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='animate__animated animate__fadeIn '>
         <Grid container>
           <Grid item xs={12} marginTop={2}>
             <TextField

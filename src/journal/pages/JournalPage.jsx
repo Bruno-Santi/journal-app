@@ -4,7 +4,7 @@ import { NothingSelectedView, NoteView } from "../views";
 import { IconButton } from "@mui/material";
 export const JournalPage = () => {
   return (
-    <JournalLayout>
+    <JournalLayout className='animate__animated animate__fadeIn '>
       <NothingSelectedView />
       {/* <NoteView /> */}
       <IconButton

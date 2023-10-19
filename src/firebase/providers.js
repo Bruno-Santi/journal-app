@@ -3,6 +3,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { fireBaseAuth } from "./config";
 
@@ -33,10 +34,10 @@ export const signInWithGoogle = async () => {
 
 export const registerUserWithEmailPassword = async ({ email, password, displayName }) => {
   try {
-    console.log(password);
-    const resp = await createUserWithEmailAndPassword(fireBaseAuth, email, password);
+    const resp = await createUserWithEmailAndPassword(fireBaseAuth, email, password, displayName);
     const { uid, photoURL } = await resp.user;
-
+    await updateProfile(fireBaseAuth.currentUser, { displayName });
+    console.log(displayName);
     return {
       ok: true,
       uid,
@@ -51,11 +52,17 @@ export const registerUserWithEmailPassword = async ({ email, password, displayNa
 
 export const loginUserWithEmailAndPassword = async (formData) => {
   try {
-    const result = await signInWithEmailAndPassword(fireBaseAuth, formData.email, formData.password);
-    const { email } = await result.user;
+    const result = await signInWithEmailAndPassword(
+      fireBaseAuth,
+      formData.email,
+      formData.password,
+      formData.displayName
+    );
+    const { email, displayName } = await result.user;
     return {
       ok: true,
       email: email,
+      displayName: displayName,
     };
   } catch (error) {
     console.log(error);

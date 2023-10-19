@@ -3,7 +3,14 @@ import { SaveOutlined } from "@mui/icons-material";
 import { ImageGallery } from "../components/ImageGallery";
 export const NoteView = () => {
   return (
-    <Grid container direction='row' justifyContent='space-between' alignItems='center' sx={{ marginBottom: 2 }}>
+    <Grid
+      className='animate__animated animate__fadeIn '
+      container
+      direction='row'
+      justifyContent='space-between'
+      alignItems='center'
+      sx={{ marginBottom: 2 }}
+    >
       <Grid item>
         <Typography sx={{ fontSize: 39, fontWeight: "light", marginBottom: 2 }}>August 28, 2023</Typography>
       </Grid>
