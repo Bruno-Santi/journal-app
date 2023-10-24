@@ -5,16 +5,14 @@ import { useForm } from "../../hooks/useForm";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks";
-
+const formData = {
+  displayName: "",
+  email: "",
+  password: "",
+};
 export const RegisterPage = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const dispatch = useDispatch();
-  const formData = {
-    displayName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
 
   const formValidations = {
     displayName: [(value) => value.length >= 1, "This field is required"],
@@ -41,13 +39,15 @@ export const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setFormSubmitted(true);
+
     dispatch(startCreatingUserWithEmailPassword(formState));
     console.log(formState);
     if (!isFormValid) return;
     console.log(formState);
   };
-  console.log(passwordValid);
+
   return (
     <AuthLayout title='Register'>
       <form onSubmit={handleSubmit} className='animate__animated animate__fadeIn '>
