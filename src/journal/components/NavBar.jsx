@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, IconButton, Grid, Typography } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Grid, Typography, Button } from "@mui/material";
 import { LoginOutlined, MenuOutlined } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 
@@ -25,9 +25,11 @@ export const NavBar = ({ drawerWidth = 240 }) => {
           <Typography variant='h6' noWrap component='div'>
             Journal App
           </Typography>
-          <IconButton color='error'>
-            <LoginOutlined onClick={() => handleLogOut()}></LoginOutlined>
-          </IconButton>
+          <Button>
+            <IconButton color='error'>
+              <LoginOutlined onClick={() => handleLogOut()}></LoginOutlined>
+            </IconButton>
+          </Button>
         </Grid>
       </Toolbar>
     </AppBar>

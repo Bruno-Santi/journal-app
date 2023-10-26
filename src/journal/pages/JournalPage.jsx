@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { creatingNewNote, startNewNote } from "../../store/journal";
 export const JournalPage = () => {
-  const { isSaving, active } = useSelector((state) => state.journal);
+  const { isSaving, active, notes } = useSelector((state) => state.journal);
   const dispatch = useDispatch();
   const onClickNewNote = () => {
     dispatch(creatingNewNote());
@@ -13,7 +13,7 @@ export const JournalPage = () => {
   };
   return (
     <JournalLayout className='animate__animated animate__fadeIn '>
-      {active ? <NoteView /> : <NothingSelectedView />}
+      {active ? <NoteView /> : <NothingSelectedView /> || notes.length ? <NothingSelectedView /> : <NoteView />}
 
       <IconButton
         disabled={isSaving}
