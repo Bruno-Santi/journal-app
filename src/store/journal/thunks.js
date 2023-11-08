@@ -20,14 +20,15 @@ export const startNewNote = () => {
       title: "",
       body: "",
       date: new Date().getTime(),
+      imageUrls: [],
     };
 
     const newDoc = doc(collection(fireBaseDB, `/${uid}/journalApp/notes`));
     const resp = await setDoc(newDoc, newNote);
     newNote.id = newDoc.id;
     dispatch(addNewEmptyNote(newNote));
+
     dispatch(setActiveNote(newNote));
-    console.log(newDoc, resp);
   };
 };
 
@@ -65,6 +66,7 @@ export const startingUploadingFiles = (files = []) => {
     }
 
     const photosUrls = await Promise.all(filesUploadPromises);
+    console.log(photosUrls);
     dispatch(setPhotosToActiveNote(photosUrls));
   };
 };
